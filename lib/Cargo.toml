@@ -5,3 +5,15 @@ edition = "2021"
 
 [dependencies]
 artemis-core = { path = "../crates/artemis-core" }
+jito-geyser-client = { path = "../crates/jito-geyser-client" }
+jito-geyser-protos = { path = "../crates/jito-geyser-protos" }
+prost-types = { workspace = true }
+solana-client = { workspace = true }
+solana-program = { workspace = true }
+solana-sdk = { workspace = true }
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+tonic = { workspace = true }
+tracing = { workspace = true }
+anyhow = { workspace = true }
+async-trait = { workspace = true }

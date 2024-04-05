@@ -1,21 +1,15 @@
 use anyhow::Result;
+use artemis_core::types::{Collector, CollectorStream};
 use async_trait::async_trait;
 use jito_geyser_client::interceptor::GrpcInterceptor;
-use jito_geyser_protos::solana::geyser::{geyser_client::GeyserClient, SubscribeSlotUpdateRequest};
+use jito_geyser_protos::solana::geyser::{
+    geyser_client::GeyserClient, SubscribeSlotUpdateRequest, TimestampedSlotUpdate,
+};
 use tokio_stream::StreamExt;
 use tonic::{codegen::InterceptedService, transport::Channel, IntoRequest};
 
-use artemis_core::types::{Collector, CollectorStream};
-
 pub struct SlotCollector {
     geyser_client: GeyserClient<InterceptedService<Channel, GrpcInterceptor>>,
-}
-
-#[derive(Debug, Clone, Default)]
-pub struct NewSlot {
-    pub slot: u64,
-    pub parent_slot: Option<u64>,
-    pub status: i32,
 }
 
 impl SlotCollector {
@@ -25,24 +19,17 @@ impl SlotCollector {
 }
 
 #[async_trait]
-impl Collector<NewSlot> for SlotCollector {
-    async fn get_event_stream(&mut self) -> Result<CollectorStream<'_, NewSlot>> {
+impl Collector<TimestampedSlotUpdate> for SlotCollector {
+    async fn get_event_stream(&mut self) -> Result<CollectorStream<'_, TimestampedSlotUpdate>> {
         let stream = self
             .geyser_client
             .subscribe_slot_updates(IntoRequest::into_request(SubscribeSlotUpdateRequest {}))
             .await
             .expect("subscribes to slot stream");
 
-        let stream = stream.into_inner().map(|msg| match msg {
-            Ok(update) => match update.slot_update {
-                Some(slot) => NewSlot {
-                    slot: slot.slot,
-                    parent_slot: slot.parent_slot,
-                    status: slot.status,
-                },
-                None => NewSlot::default(),
-            },
-            Err(_) => todo!(),
+        let stream = stream.into_inner().filter_map(|event| match event {
+            Ok(evt) => Some(evt),
+            Err(_) => None,
         });
 
         Ok(Box::pin(stream))
