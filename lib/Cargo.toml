@@ -9,6 +9,7 @@ jito-geyser-client = { path = "../crates/jito-geyser-client" }
 jito-geyser-protos = { path = "../crates/jito-geyser-protos" }
 prost-types = { workspace = true }
 solana-client = { workspace = true }
+solana-account-decoder = { workspace = true }
 solana-program = { workspace = true }
 solana-sdk = { workspace = true }
 tokio = { workspace = true }
