@@ -35,7 +35,7 @@ impl Collector<RpcBlockUpdate> for BlockCollector {
             .client
             .block_subscribe(self.filter.clone(), self.config.clone())
             .await
-            .expect("msg");
+            .expect("subscribes to block updates");
         let stream = stream.0.filter_map(|evt| Some(evt.value));
 
         Ok(Box::pin(stream))

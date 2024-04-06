@@ -18,7 +18,11 @@ impl RootCollector {
 #[async_trait]
 impl Collector<Slot> for RootCollector {
     async fn get_event_stream(&mut self) -> Result<CollectorStream<'_, Slot>> {
-        let stream = self.client.root_subscribe().await.expect("msg");
+        let stream = self
+            .client
+            .root_subscribe()
+            .await
+            .expect("subscribes to root stream");
         let stream = stream.0.filter_map(|evt| Some(evt));
 
         Ok(Box::pin(stream))

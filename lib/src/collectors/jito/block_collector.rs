@@ -26,7 +26,7 @@ impl Collector<TimestampedBlockUpdate> for BlockCollector {
             .geyser_client
             .subscribe_block_updates(IntoRequest::into_request(SubscribeBlockUpdatesRequest {}))
             .await
-            .expect("subscribes to slot stream");
+            .expect("subscribes to block updates");
 
         let stream = stream.into_inner().filter_map(|event| match event {
             Ok(evt) => Some(evt),

@@ -35,7 +35,7 @@ impl Collector<RpcSignatureResult> for SignatureCollector {
             .client
             .signature_subscribe(&self.signature, self.config.clone())
             .await
-            .expect("msg");
+            .expect("subscribes to signature updates");
         let stream = stream.0.filter_map(|evt| Some(evt.value));
 
         Ok(Box::pin(stream))

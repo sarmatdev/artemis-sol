@@ -35,7 +35,7 @@ impl Collector<RpcLogsResponse> for LogsCollector {
             .client
             .logs_subscribe(self.filter.clone(), self.config.clone())
             .await
-            .expect("msg");
+            .expect("subscribes to logs stream");
         let stream = stream.0.filter_map(|evt| Some(evt.value));
 
         Ok(Box::pin(stream))

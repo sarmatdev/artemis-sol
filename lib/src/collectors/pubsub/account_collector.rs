@@ -37,7 +37,7 @@ impl Collector<UiAccount> for AccountCollector {
             .client
             .account_subscribe(&pubkey, Some(RpcAccountInfoConfig::default()))
             .await
-            .expect("msg");
+            .expect("subscribes to account updates");
         let stream = stream.0.filter_map(|evt| Some(evt.value));
 
         Ok(Box::pin(stream))

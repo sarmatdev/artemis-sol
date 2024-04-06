@@ -17,7 +17,11 @@ impl SlotCollector {
 #[async_trait]
 impl Collector<SlotInfo> for SlotCollector {
     async fn get_event_stream(&mut self) -> Result<CollectorStream<'_, SlotInfo>> {
-        let stream = self.client.slot_subscribe().await.expect("msg");
+        let stream = self
+            .client
+            .slot_subscribe()
+            .await
+            .expect("subscribes to slot stream");
         let stream = stream.0.filter_map(|evt| Some(evt));
 
         Ok(Box::pin(stream))

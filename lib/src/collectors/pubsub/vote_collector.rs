@@ -17,7 +17,11 @@ impl VoteCollector {
 #[async_trait]
 impl Collector<RpcVote> for VoteCollector {
     async fn get_event_stream(&mut self) -> Result<CollectorStream<'_, RpcVote>> {
-        let stream = self.client.vote_subscribe().await.expect("msg");
+        let stream = self
+            .client
+            .vote_subscribe()
+            .await
+            .expect("subscribes to vote stream");
         let stream = stream.0.filter_map(|evt| Some(evt));
 
         Ok(Box::pin(stream))

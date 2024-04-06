@@ -35,7 +35,7 @@ impl Collector<MaybePartialAccountUpdate> for PartialAccountCollector {
                 skip_vote_accounts: self.skip_votes,
             })
             .await
-            .expect("subscribe to geyser");
+            .expect("subscribes to partial updates");
 
         let stream = stream.into_inner().filter_map(|evt| match evt {
             Ok(evt) => Some(evt),

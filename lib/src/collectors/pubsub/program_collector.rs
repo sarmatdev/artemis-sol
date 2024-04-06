@@ -38,7 +38,7 @@ impl Collector<RpcKeyedAccount> for ProgramCollector {
             .client
             .program_subscribe(&pubkey, self.config.clone())
             .await
-            .expect("msg");
+            .expect("subscribes to program updates");
         let stream = stream.0.filter_map(|evt| Some(evt.value));
 
         Ok(Box::pin(stream))
