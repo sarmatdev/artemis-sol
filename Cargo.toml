@@ -1,0 +1,47 @@
+name = "artemis-sol"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = ["crates/*", "lib"]
+resolver = "2"
+
+[workspace.dependencies]
+artemis-core = { git = "https://github.com/paradigmxyz/artemis.git", package = "artemis-core" }
+anyhow = "1.0.70"
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+
+# solana
+solana-sdk = "2.0"
+solana-client = "2.0"
+solana-program = "2.0"
+solana-account-decoder = "2.0"
+solana-transaction-status = "2.0"
+
+tokio = { version = "1.37.0", features = ["full"] }
+tokio-stream = { version = "0.1.15", features = ['sync'] }
+tonic = { version = "0.10.2", features = [
+    "tls",
+    "tls-roots",
+    "tls-webpki-roots",
+] }
+helius = { git = "https://github.com/helius-labs/helius-rust-sdk.git", branch = "dev" }
+tonic-build = "0.10.2"
+async-trait = "0.1.79"
+log = "0.4.17"
+lru = "0.12.0"
+prost = "0.12.1"
+prost-types = "0.12.1"
+protobuf-src = "1.1.0"
+rand = "0.8"
+serde = "1.0.160"
+serde_derive = "1.0.160"
+curve25519-dalek = "4.1.2"
+serde_json = "1.0.96"
+elliptic-curve = "0.11.12"
+zeroize = "1.7.0"
+thiserror = "1.0.40"
+bincode = "1.3.3"
+bs58 = "0.5.0"
+enum-iterator = "1.4.1"

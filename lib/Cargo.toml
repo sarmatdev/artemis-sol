@@ -1,0 +1,21 @@
+[package]
+name = "artemis-sol"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+artemis-core = { path = "../crates/artemis-core" }
+async-trait = { workspace = true }
+helius = { workspace = true }
+jito-geyser-client = { path = "../crates/jito-geyser-client" }
+jito-geyser-protos = { path = "../crates/jito-geyser-protos" }
+prost-types = { workspace = true }
+solana-account-decoder = { workspace = true }
+solana-client = { workspace = true }
+solana-program = { workspace = true }
+solana-sdk = { workspace = true }
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+tonic = { workspace = true }
+tracing = { workspace = true }

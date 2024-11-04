@@ -1,0 +1,27 @@
+[package]
+name = "jito-geyser-protos"
+version = "2.0.5"
+license = "Apache-2.0"
+authors = ["Jito Foundation <team@jito.network>"]
+edition = "2021"
+repository = "https://github.com/jito-foundation/geyser-grpc-plugin"
+homepage = "https://jito.network/"
+description = "Jito's Solana geyser protobufs and helper libraries"
+
+[dependencies]
+bincode = { workspace = true }
+prost = { workspace = true }
+prost-types = { workspace = true }
+serde = { workspace = true }
+solana-account-decoder = { workspace = true }
+solana-sdk = { workspace = true }
+solana-transaction-status = { workspace = true }
+tonic = { workspace = true }
+
+[build-dependencies]
+protobuf-src = { workspace = true }
+tonic-build = { workspace = true }
+
+[dev-dependencies]
+bs58 = { workspace = true }
+enum-iterator = { workspace = true }
