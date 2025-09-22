@@ -1,3 +1,4 @@
+[workspace.metadata]
 name = "artemis-sol"
 version = "0.1.0"
 edition = "2021"
@@ -7,7 +8,6 @@ members = ["crates/*", "lib"]
 resolver = "2"
 
 [workspace.dependencies]
-artemis-core = { git = "https://github.com/paradigmxyz/artemis.git", package = "artemis-core" }
 anyhow = "1.0.70"
 tracing = "0.1.40"
 tracing-subscriber = "0.3.18"
